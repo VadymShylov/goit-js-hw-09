@@ -43,12 +43,12 @@ const options = {
           const now = new Date().getTime();
           const remainTime = chooseDate - now;
 
-          const { days, hours, minutes, seconds } = convertedMsec(remainTime );
+          const { days, hours, minutes, seconds } = convertMs(remainTime );
 
-          date.innerHTML = days < 10 ? zeroing(days) : days;
-          hour.innerHTML = hours < 10 ? zeroing(hours) : hours;
-          minute.innerHTML = minutes < 10 ? zeroing(minutes) : minutes;
-          second.innerHTML = seconds < 10 ? zeroing(seconds) : seconds;
+          date.innerHTML = days < 10 ? addLeadingZero(days) : days;
+          hour.innerHTML = hours < 10 ? addLeadingZero(hours) : hours;
+          minute.innerHTML = minutes < 10 ? addLeadingZero(minutes) : minutes;
+          second.innerHTML = seconds < 10 ? addLeadingZero(seconds) : seconds;
 
           if (remainTime  < 1000) {
             clearInterval(timer);
@@ -59,14 +59,14 @@ const options = {
 
       // zeroing
 
-      function zeroing(value) {
+      function addLeadingZero(value) {
         const stringValue = String(value);
         return stringValue.padStart(2, '0');
       }
 
-      //  convertedMsec
+      //  convertMs
       
-      function convertedMsec(ms) {
+      function convertMs(ms) {
         const second = 1000;
         const minute = second * 60;
         const hour = minute * 60;
