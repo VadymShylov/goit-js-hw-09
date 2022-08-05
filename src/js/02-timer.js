@@ -57,14 +57,14 @@ const options = {
         }, 1000);
       }
 
-      // addLeadingZero
+      // zeroing
 
       function zeroing(value) {
         const stringValue = String(value);
         return stringValue.padStart(2, '0');
       }
 
-      // convert 
+      //  convertedMsec
       
       function convertedMsec(ms) {
         const second = 1000;
