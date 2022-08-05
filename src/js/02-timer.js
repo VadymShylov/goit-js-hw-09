@@ -13,7 +13,7 @@ const second = document.querySelector('[data-seconds]');
 let timer = null;
 
 startBtn.disabled = true;
-dateChosen.disabled = false;
+// dateChosen.disabled = false;
 //flatpickr
 
 const options = {
@@ -25,20 +25,21 @@ const options = {
     // const currentDate = new Date();
     if (selectedDate[0] <= new Date()) {
       startBtn.disabled = true;
-      dateChosen.disabled = false;
+      // dateChosen.disabled = false;
       Notiflix.Notify.failure('Please choose a date in the future');
     } else {
       startBtn.disabled = false;
-      dateChosen.disabled = true;
+      // dateChosen.disabled = false;
 
       startBtn.addEventListener('click', countTime);
-      dateChosen.addEventListener('click', countTime);
+      dateChosen.addEventListener('click', timer);
 
       // time counter
 
       function countTime() {
         timer = setInterval(() => {
-          startBtn.disabled = true;
+           startBtn.disabled = true;
+            dateChosen.disabled = true;
 
           const chooseDate = new Date(
             dateChosen.value.replace(/-/g, '/')
