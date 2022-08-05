@@ -13,7 +13,7 @@ const second = document.querySelector('[data-seconds]');
 let timer = null;
 
 startBtn.disabled = true;
-
+dateChosen.disabled = false;
 //flatpickr
 
 const options = {
@@ -25,11 +25,14 @@ const options = {
     // const currentDate = new Date();
     if (selectedDate[0] <= new Date()) {
       startBtn.disabled = true;
+      dateChosen.disabled = false;
       Notiflix.Notify.failure('Please choose a date in the future');
     } else {
       startBtn.disabled = false;
+      dateChosen.disabled = true;
 
       startBtn.addEventListener('click', countTime);
+      dateChosen.addEventListener('click', countTime);
 
       // time counter
 
@@ -37,22 +40,23 @@ const options = {
         timer = setInterval(() => {
           startBtn.disabled = true;
 
-          
-
-          const chooseDate = new Date(dateChosen.value.replace(/-/g, '/')).getTime();
+          const chooseDate = new Date(
+            dateChosen.value.replace(/-/g, '/')
+          ).getTime();
           const now = new Date().getTime();
           const remainTime = chooseDate - now;
 
-          const { days, hours, minutes, seconds } = convertMs(remainTime );
+          const { days, hours, minutes, seconds } = convertMs(remainTime);
 
           date.innerHTML = days < 10 ? addLeadingZero(days) : days;
           hour.innerHTML = hours < 10 ? addLeadingZero(hours) : hours;
           minute.innerHTML = minutes < 10 ? addLeadingZero(minutes) : minutes;
           second.innerHTML = seconds < 10 ? addLeadingZero(seconds) : seconds;
 
-          if (remainTime  < 1000) {
+          if (remainTime < 1000) {
             clearInterval(timer);
             startBtn.disabled = false;
+            dateChosen.disabled = false;
           }
         }, 1000);
       }
@@ -65,7 +69,7 @@ const options = {
       }
 
       //  convertMs
-      
+
       function convertMs(ms) {
         const second = 1000;
         const minute = second * 60;
