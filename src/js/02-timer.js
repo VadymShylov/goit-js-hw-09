@@ -57,7 +57,7 @@ const options = {
         }, 1000);
       }
 
-      // zeroing
+      // addLeadingZero
 
       function addLeadingZero(value) {
         const stringValue = String(value);
